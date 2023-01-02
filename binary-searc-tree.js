@@ -89,6 +89,37 @@ function Tree(array) {
     return node;
   }
 
+  //function to remove node in bst
+  function remove(valueToRemove, node = root) {
+    if (node == null) return node;
+
+    if (valueToRemove < node.value) {
+      node.leftNode = remove(valueToRemove, node.leftNode);
+    } else if (valueToRemove > node.value) {
+      node.rightNode = remove(valueToRemove, node.rightNode);
+    } else {
+      if (node.leftNode == null) {
+        return node.rightNode;
+      } else if (node.rightNode == null) {
+        return node.leftNode;
+      }
+
+      node.value = nextMinValue(node.rightNode);
+
+      node.rightIndex = remove(node.value, node.rightNode);
+    }
+
+    return node;
+  }
+
+  function nextMinValue(node) {
+    while (node.leftNode != null) {
+      node = node.leftNode;
+    }
+
+    return node.value;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -103,6 +134,7 @@ function Tree(array) {
       prettyPrint(node.leftNode, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   };
+
   return {
     get root() {
       return root;
@@ -110,6 +142,7 @@ function Tree(array) {
     getArray,
     prettyPrint,
     insert,
+    remove,
   };
 }
 
@@ -117,5 +150,5 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
-bst.insert(6);
+bst.remove(67);
 bst.prettyPrint(bst.root);
