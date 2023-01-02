@@ -112,12 +112,30 @@ function Tree(array) {
     return node;
   }
 
+  //function finds the next big value than node
   function nextMinValue(node) {
     while (node.leftNode != null) {
       node = node.leftNode;
     }
 
     return node.value;
+  }
+
+  //function to find a given node
+  function find(value, node = root) {
+    if (node == null) {
+      console.log("Value doesn't exist in the tree");
+      return;
+    }
+    if (value < node.value) {
+      find(value, node.leftNode);
+    } else if (value > node.value) {
+      find(value, node.rightNode);
+    } else {
+      console.log(node);
+    }
+
+    return;
   }
 
   // code from odin project
@@ -143,12 +161,12 @@ function Tree(array) {
     prettyPrint,
     insert,
     remove,
+    find,
   };
 }
 
 let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
-bst.prettyPrint(bst.root);
-bst.remove(67);
-bst.prettyPrint(bst.root);
+// bst.prettyPrint(bst.root);
+bst.find(8);
