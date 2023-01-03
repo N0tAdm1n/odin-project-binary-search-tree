@@ -195,6 +195,15 @@ function Tree(array) {
     return result;
   }
 
+  function height(node = root) {
+    if (node == null) return -1;
+
+    let leftHeight = height(node.leftNode);
+    let rightHeight = height(node.rightNode);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -223,6 +232,7 @@ function Tree(array) {
     inorder,
     preorder,
     postorder,
+    height,
   };
 }
 
@@ -231,4 +241,5 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
-console.log(bst.postorder());
+// console.log(bst.postorder());
+console.log(bst.height());
