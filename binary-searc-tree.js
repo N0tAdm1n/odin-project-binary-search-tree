@@ -204,6 +204,22 @@ function Tree(array) {
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
+  function depth(node, temp = root) {
+    if (!node) return `node doesnt exist`;
+
+    if (temp == node) return 0;
+
+    let result = 0;
+
+    if (node.value < temp.value) {
+      result = depth(node, temp.leftNode) + 1;
+    } else {
+      result = depth(node, temp.rightNode) + 1;
+    }
+
+    return result;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -233,6 +249,7 @@ function Tree(array) {
     preorder,
     postorder,
     height,
+    depth,
   };
 }
 
@@ -242,4 +259,5 @@ let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
 // console.log(bst.postorder());
-console.log(bst.height());
+console.log(bst.depth(bst.root.leftNode.rightNode.leftNode.leftNode));
+// console.log(bst.height());
