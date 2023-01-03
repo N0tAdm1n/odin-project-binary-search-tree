@@ -163,6 +163,17 @@ function Tree(array) {
     return traversalArr;
   }
 
+  // function for inorder traversal
+  function inorder(node = root, result = []) {
+    if (node == null) return;
+
+    inorder(node.leftNode, result);
+    result.push(node.value);
+    inorder(node.rightNode, result);
+
+    return result;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -188,6 +199,7 @@ function Tree(array) {
     remove,
     find,
     levelOrder,
+    inorder,
   };
 }
 
@@ -196,4 +208,4 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
-console.log(bst.levelOrder());
+console.log(bst.inorder());
