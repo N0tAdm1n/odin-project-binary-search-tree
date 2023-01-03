@@ -220,6 +220,18 @@ function Tree(array) {
     return result;
   }
 
+  function isBalanced(node = root) {
+    if (!root) return `Tree is empty`;
+
+    if (!node) return true;
+
+    if (Math.abs(height(node.leftNode) - height(node.rightNode)) <= 1) {
+      if (isBalanced(node.leftNode) && isBalanced(node.rightNode)) return true;
+    }
+
+    return false;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -250,6 +262,7 @@ function Tree(array) {
     postorder,
     height,
     depth,
+    isBalanced,
   };
 }
 
@@ -257,7 +270,10 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 // let testArr = [1, 2, 3];
 let bst = Tree(testArr);
 // bst.buildTree();
+// bst.insert(0);
+// bst.insert(2);
 bst.prettyPrint(bst.root);
 // console.log(bst.postorder());
-console.log(bst.depth(bst.root.leftNode.rightNode.leftNode.leftNode));
+// console.log(bst.depth(bst.root.leftNode.rightNode.leftNode.leftNode));
 // console.log(bst.height());
+console.log(bst.isBalanced());
