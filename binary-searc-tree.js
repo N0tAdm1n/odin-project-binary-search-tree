@@ -174,12 +174,23 @@ function Tree(array) {
     return result;
   }
 
+  // preorder traversal
   function preorder(node = root, result = []) {
     if (node == null) return;
 
     result.push(node.value);
     preorder(node.leftNode, result);
     preorder(node.rightNode, result);
+
+    return result;
+  }
+
+  function postorder(node = root, result = []) {
+    if (node == null) return;
+
+    postorder(node.leftNode, result);
+    postorder(node.rightNode, result);
+    result.push(node.value);
 
     return result;
   }
@@ -211,6 +222,7 @@ function Tree(array) {
     levelOrder,
     inorder,
     preorder,
+    postorder,
   };
 }
 
@@ -219,4 +231,4 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
-console.log(bst.preorder());
+console.log(bst.postorder());
