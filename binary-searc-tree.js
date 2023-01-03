@@ -174,6 +174,16 @@ function Tree(array) {
     return result;
   }
 
+  function preorder(node = root, result = []) {
+    if (node == null) return;
+
+    result.push(node.value);
+    preorder(node.leftNode, result);
+    preorder(node.rightNode, result);
+
+    return result;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -200,6 +210,7 @@ function Tree(array) {
     find,
     levelOrder,
     inorder,
+    preorder,
   };
 }
 
@@ -208,4 +219,4 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = Tree(testArr);
 // bst.buildTree();
 bst.prettyPrint(bst.root);
-console.log(bst.inorder());
+console.log(bst.preorder());
