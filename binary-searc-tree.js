@@ -138,6 +138,31 @@ function Tree(array) {
     return;
   }
 
+  // function for breadth-first traversal
+  function levelOrder() {
+    let queue = [];
+    let traversalArr = [];
+    let node = root;
+
+    if (node == null) return;
+
+    queue.push(node);
+
+    while (queue.length) {
+      let level = [];
+      for (let i = 0; i < queue.length; i++) {
+        traversalArr.push(queue[0].value);
+
+        if (queue[0].leftNode) queue.push(queue[0].leftNode);
+        if (queue[0].rightNode) queue.push(queue[0].rightNode);
+
+        queue.shift();
+      }
+    }
+
+    return traversalArr;
+  }
+
   // code from odin project
   const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node.rightNode !== null) {
@@ -162,11 +187,13 @@ function Tree(array) {
     insert,
     remove,
     find,
+    levelOrder,
   };
 }
 
 let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+// let testArr = [1, 2, 3];
 let bst = Tree(testArr);
 // bst.buildTree();
-// bst.prettyPrint(bst.root);
-bst.find(8);
+bst.prettyPrint(bst.root);
+console.log(bst.levelOrder());
