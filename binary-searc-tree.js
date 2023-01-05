@@ -220,6 +220,10 @@ function Tree(array) {
     return result;
   }
 
+  // function to check if the trre is balanced
+  // A balanced tree is one where the
+  // difference between heights of left subtree
+  // and right subtree of every node is not more than 1.
   function isBalanced(node = root) {
     if (!root) return `Tree is empty`;
 
@@ -230,6 +234,12 @@ function Tree(array) {
     }
 
     return false;
+  }
+
+  function rebalance() {
+    let array = inorder();
+
+    root = buildTree(array, 0, array.length - 1);
   }
 
   // code from odin project
@@ -263,6 +273,7 @@ function Tree(array) {
     height,
     depth,
     isBalanced,
+    rebalance,
   };
 }
 
@@ -270,10 +281,12 @@ let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 // let testArr = [1, 2, 3];
 let bst = Tree(testArr);
 // bst.buildTree();
-// bst.insert(0);
-// bst.insert(2);
+bst.insert(0);
+bst.insert(2);
 bst.prettyPrint(bst.root);
 // console.log(bst.postorder());
 // console.log(bst.depth(bst.root.leftNode.rightNode.leftNode.leftNode));
 // console.log(bst.height());
 console.log(bst.isBalanced());
+bst.rebalance();
+bst.prettyPrint(bst.root);
